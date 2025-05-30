@@ -1,4 +1,4 @@
-# AugmentOS-Cloud-Example-App
+# AugmentOS-Extended-Example-App
 
 ### Install AugmentOS on your phone
 
@@ -36,7 +36,7 @@ AugmentOS install links: [AugmentOS.org/install](https://AugmentOS.org/install)
 
 1. [Install bun](https://bun.sh/docs/installation)
 
-2. Create a new repo from this template using the `Use this template` dropdown in the upper right or the following command: `gh repo create --template AugmentOS-Community/AugmentOS-Cloud-Example-App`
+2. Create a new repo from this template using the `Use this template` dropdown in the upper right or the following command: `gh repo create --template AugmentOS-Community/AugmentOS-Extended-Example-App`
 
     ![Create repo from template](https://github.com/user-attachments/assets/c10e14e8-2dc5-4dfa-adac-dd334c1b73a5)
 
