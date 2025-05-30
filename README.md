@@ -24,7 +24,13 @@ AugmentOS install links: [AugmentOS.org/install](https://AugmentOS.org/install)
 
 4. Set a unique package name like `com.yourName.yourAppName`
 
-5. For "Public URL", enter your Ngrok's static URL
+5. For "Public URL", enter your Ngrok's static URL or the public URL of your server
+
+6. After the app is created, you will be given an API key. Copy this key and use it in the `.env` file below.
+
+7. You can now add settings and tools to your app via the AugmentOS Developer Console.  Let's upload this example's `app_config.json` file by clicking the "Import app_config.json" button under **Configuration Management**:
+
+    ![Import app config](https://github.com/user-attachments/assets/14736150-7f02-43db-8b29-bbe918a4086b)
 
 ### Get your APP running!
 
@@ -61,4 +67,23 @@ Check out the full documentation at [docs.AugmentOS.org](https://docs.augmentos.
 
 #### Subscribing to events
 
-You can listen for transcriptions, translations, and other events within the onSession function.
+You can listen for transcriptions, translations, settings updates, and other events within the onSession function.
+
+#### Authenticated Webview
+
+The app can provide an authenticated webview endpoint for users:
+
+- Access the webview at `/webview`
+- Authentication is handled automatically for AugmentOS users
+- The current AugmentOS user is available at request.authUserId
+- Create a web interface that allows users to interact with your app's functionality
+
+#### Tool Calls
+
+Your app can respond to tool calls via `handleToolCall` in your code:
+
+- Define custom tools that can be called by AugmentOS
+- Each tool takes specific parameters and returns a result
+- Tools can perform operations on your application's data
+- Properly handle authentication and validation in your tool implementations
+
