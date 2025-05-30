@@ -1,5 +1,11 @@
 {
   "description": "A extended example app that shows how to use AugmentOS.",
+  "permissions": [
+    {
+      "type": "MICROPHONE",
+      "description": "To show transcriptions"
+    }
+  ],
   "settings": [
     {
       "type": "toggle",
