@@ -50,10 +50,10 @@ AugmentOS install links: [AugmentOS.org/install](https://AugmentOS.org/install)
      ```
      PORT=3000
      PACKAGE_NAME=com.yourName.yourAppName
-     API_KEY=your_api_key_from_console
+     AUGMENTOS_API_KEY=your_api_key_from_console
      ```
    * Make sure the `PACKAGE_NAME` matches what you registered in the AugmentOS Console
-   * Get your `API_KEY` from the AugmentOS Developer Console
+   * Get your `AUGMENTOS_API_KEY` from the AugmentOS Developer Console
 
 6. Run your app with `bun run dev`
 
