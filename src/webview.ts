@@ -1,10 +1,10 @@
-import { AuthenticatedRequest, TpaServer } from '@augmentos/sdk';
+import { AuthenticatedRequest, TpaServer } from '@mentra/sdk';
 import express from 'express';
 import path from 'path';
 
 /**
- * Sets up all Express routes and middleware for the TPA server
- * @param server The TPA server instance
+ * Sets up all Express routes and middleware for the server
+ * @param server The server instance
  */
 export function setupExpressRoutes(server: TpaServer): void {
   // Get the Express app instance
@@ -18,7 +18,7 @@ export function setupExpressRoutes(server: TpaServer): void {
   // Register a route for handling webview requests
   app.get('/webview', (req: AuthenticatedRequest, res) => {
     if (req.authUserId) {
-      // Render the reminders template
+      // Render the webview template
       res.render('webview', {
         userId: req.authUserId,
       });

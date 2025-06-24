@@ -1,5 +1,5 @@
 {
-  "description": "A extended example app that shows how to use AugmentOS.",
+  "description": "A extended example app that shows how to use MentraOS.",
   "permissions": [
     {
       "type": "MICROPHONE",

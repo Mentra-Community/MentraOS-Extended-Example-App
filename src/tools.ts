@@ -1,4 +1,4 @@
-import { ToolCall, TpaSession } from '@augmentos/sdk';
+import { ToolCall, TpaSession } from '@mentra/sdk';
 
 /**
  * Handle a tool call
@@ -20,4 +20,4 @@ export async function handleToolCall(toolCall: ToolCall, userId: string, session
   }
 
   return undefined;
-} 
+}

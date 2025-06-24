@@ -1,17 +1,17 @@
-import { ToolCall, TpaServer, TpaSession } from '@augmentos/sdk';
+import { ToolCall, TpaServer, TpaSession } from '@mentra/sdk';
 import path from 'path';
 import { setupExpressRoutes } from './webview';
 import { handleToolCall } from './tools';
 
 const PACKAGE_NAME = process.env.PACKAGE_NAME ?? (() => { throw new Error('PACKAGE_NAME is not set in .env file'); })();
-const AUGMENTOS_API_KEY = process.env.AUGMENTOS_API_KEY ?? (() => { throw new Error('AUGMENTOS_API_KEY is not set in .env file'); })();
+const MENTRAOS_API_KEY = process.env.MENTRAOS_API_KEY ?? (() => { throw new Error('MENTRAOS_API_KEY is not set in .env file'); })();
 const PORT = parseInt(process.env.PORT || '3000');
 
-class ExampleAugmentOSApp extends TpaServer {
+class ExampleMentraOSApp extends TpaServer {
   constructor() {
     super({
       packageName: PACKAGE_NAME,
-      apiKey: AUGMENTOS_API_KEY,
+      apiKey: MENTRAOS_API_KEY,
       port: PORT,
       publicDir: path.join(__dirname, '../public'),
     });
@@ -24,7 +24,7 @@ class ExampleAugmentOSApp extends TpaServer {
   private userSessionsMap = new Map<string, TpaSession>();
 
   /**
-   * Handles tool calls from the AugmentOS system
+   * Handles tool calls from the MentraOS system
    * @param toolCall - The tool call request
    * @returns Promise resolving to the tool call response or undefined
    */
@@ -98,6 +98,6 @@ class ExampleAugmentOSApp extends TpaServer {
 }
 
 // Start the server
-const app = new ExampleAugmentOSApp();
+const app = new ExampleMentraOSApp();
 
 app.start().catch(console.error);
