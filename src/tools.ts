@@ -1,4 +1,4 @@
-import { ToolCall, TpaSession } from '@mentra/sdk';
+import { ToolCall, AppSession } from '@mentra/sdk';
 
 /**
  * Handle a tool call
@@ -7,7 +7,7 @@ import { ToolCall, TpaSession } from '@mentra/sdk';
  * @param session - The session object if the user has an active session
  * @returns A promise that resolves to the tool call result
  */
-export async function handleToolCall(toolCall: ToolCall, userId: string, session: TpaSession|undefined): Promise<string | undefined> {
+export async function handleToolCall(toolCall: ToolCall, userId: string, session: AppSession|undefined): Promise<string | undefined> {
   console.log(`Tool called: ${toolCall.toolId}`);
   console.log(`Tool call timestamp: ${toolCall.timestamp}`);
   console.log(`Tool call userId: ${toolCall.userId}`);

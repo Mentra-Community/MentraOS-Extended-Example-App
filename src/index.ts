@@ -1,4 +1,4 @@
-import { ToolCall, TpaServer, TpaSession } from '@mentra/sdk';
+import { ToolCall, AppServer, AppSession } from '@mentra/sdk';
 import path from 'path';
 import { setupExpressRoutes } from './webview';
 import { handleToolCall } from './tools';
@@ -7,7 +7,7 @@ const PACKAGE_NAME = process.env.PACKAGE_NAME ?? (() => { throw new Error('PACKA
 const MENTRAOS_API_KEY = process.env.MENTRAOS_API_KEY ?? (() => { throw new Error('MENTRAOS_API_KEY is not set in .env file'); })();
 const PORT = parseInt(process.env.PORT || '3000');
 
-class ExampleMentraOSApp extends TpaServer {
+class ExampleMentraOSApp extends AppServer {
   constructor() {
     super({
       packageName: PACKAGE_NAME,
@@ -21,7 +21,7 @@ class ExampleMentraOSApp extends TpaServer {
   }
 
   /** Map to store active user sessions */
-  private userSessionsMap = new Map<string, TpaSession>();
+  private userSessionsMap = new Map<string, AppSession>();
 
   /**
    * Handles tool calls from the MentraOS system
@@ -35,11 +35,11 @@ class ExampleMentraOSApp extends TpaServer {
   /**
    * Handles new user sessions
    * Sets up event listeners and displays welcome message
-   * @param session - The TPA session instance
+   * @param session - The app session instance
    * @param sessionId - Unique session identifier
    * @param userId - User identifier
    */
-  protected async onSession(session: TpaSession, sessionId: string, userId: string): Promise<void> {
+  protected async onSession(session: AppSession, sessionId: string, userId: string): Promise<void> {
     this.userSessionsMap.set(userId, session);
 
     // Show welcome message
@@ -58,17 +58,15 @@ class ExampleMentraOSApp extends TpaServer {
     };
 
     // Listen for transcriptions
-    const transcriptionHandler = session.events.onTranscription((data) => {
+    session.events.onTranscription((data) => {
       if (data.isFinal) {
         // Handle final transcription text
         displayTranscription(data.text);
       }
     });
-    // automatically remove the transcription handler when the session ends
-    this.addCleanupHandler(transcriptionHandler);
 
     // Listen for setting changes to update transcription display behavior
-    const settingsChangeHandler = session.settings.onValueChange(
+    session.settings.onValueChange(
       'show_live_transcription',
       (newValue: boolean, oldValue: boolean) => {
         console.log(`Live transcription setting changed from ${oldValue} to ${newValue}`);
@@ -79,21 +77,9 @@ class ExampleMentraOSApp extends TpaServer {
         }
       }
     );
-    // Automatically remove the settings change handler when the session ends
-    this.addCleanupHandler(settingsChangeHandler);
-
-    // Listen for errors
-    const errorHandler = session.events.onError((error) => {
-      console.error('Error:', error);
-      this.userSessionsMap.delete(userId);
-    });
-    // automatically remove the error handler when the session ends
-    this.addCleanupHandler(errorHandler);
 
     // automatically remove the session when the session ends
-    this.addCleanupHandler(() => {
-      this.userSessionsMap.delete(userId);
-    });
+    this.addCleanupHandler(() => this.userSessionsMap.delete(userId));
   }
 }
 

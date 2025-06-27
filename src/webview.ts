@@ -1,4 +1,4 @@
-import { AuthenticatedRequest, TpaServer } from '@mentra/sdk';
+import { AuthenticatedRequest, AppServer } from '@mentra/sdk';
 import express from 'express';
 import path from 'path';
 
@@ -6,7 +6,7 @@ import path from 'path';
  * Sets up all Express routes and middleware for the server
  * @param server The server instance
  */
-export function setupExpressRoutes(server: TpaServer): void {
+export function setupExpressRoutes(server: AppServer): void {
   // Get the Express app instance
   const app = server.getExpressApp();
 
